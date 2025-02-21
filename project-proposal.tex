@@ -1,0 +1,83 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Atrial Fibrillation Detection Using Transformer-based Architecture}
+
+\author{\IEEEauthorblockN{Ayush Juvekar, Aditya Karle, Majid Rostami, Shreyash Waghdhare}
+    \IEEEauthorblockA{\textit{Michigan Technological University} \\
+        Houghton, MI, USA \\
+        \{aajuveka, arkarle, majidr, spwaghdh\}@mtu.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+    This paper proposes an advanced machine learning model for accurate atrial fibrillation (AF) detection from short single-lead ECG recordings. The proposed solution combines Convolutional Neural Networks (CNNs) and Transformer architectures to achieve high accuracy and interpretability in AF detection. This project aims to improve early detection of AF, potentially leading to timely interventions and improved patient outcomes.
+\end{abstract}
+
+\begin{IEEEkeywords}
+    Atrial Fibrillation, ECG, Machine Learning, CNN, Transformer
+\end{IEEEkeywords}
+
+\section{Introduction}
+Atrial fibrillation (AF) is a common cardiac arrhythmia affecting millions worldwide, often remaining undetected and leading to severe complications such as stroke. Early detection of AF can lead to timely interventions, potentially reducing associated health risks and improving patient outcomes. This project aims to develop an advanced machine learning model for accurate AF detection from short single-lead ECG recordings.
+
+\section{Related Work}
+Several machine learning approaches have been proposed for AF detection:
+
+1) Hannun et al. \cite{hannun} developed a deep neural network that outperformed board-certified cardiologists in detecting a broad range of arrhythmias from single-lead ECGs. While highly accurate, this approach lacks interpretability.
+
+2) Andersen et al. \cite{andersen} proposed a Transformer-based DualNet architecture for AF detection, achieving state-of-the-art performance. This approach demonstrated the potential of Transformer models in ECG analysis but left room for improvement in handling variable-length inputs.
+
+3) Cao et al. \cite{cao} introduced an attention-based time-incremental convolutional neural network (ATI-CNN) for AF detection. While effective, this method did not fully exploit the long-range dependencies in ECG signals.
+
+These approaches have shown promising results, with F1 scores above 90% on hidden test sets. However, limitations include the need for large datasets, challenges in real-time processing, and limited interpretability of model decisions.
+
+\section{Methodology}
+This project proposes a hybrid approach, combining CNNs and Transformer architectures for AF classification. The methodology is justified by:
+
+\begin{itemize}
+    \item CNNs' effectiveness in processing time-series data like ECGs.
+    \item Transformers' ability to handle long sequences and capture complex temporal relationships.
+    \item The potential for improved interpretability through attention mechanisms.
+\end{itemize}
+
+The core algorithm will be a custom CNN-Transformer model. The CNN component will extract local features from ECG signals, while the Transformer will capture long-range dependencies. This approach aims to leverage the strengths of both architectures, potentially leading to improved accuracy and interpretability compared to existing methods.
+
+\section{Expected Results}
+We anticipate achieving:
+\begin{itemize}
+    \item Classification accuracy exceeding 95% on test data.
+    \item Improved interpretability of model decisions through attention mechanisms.
+    \item Reduced false positive rate compared to existing methods.
+    \item Real-time processing capability for continuous monitoring applications.
+\end{itemize}
+
+These outcomes could significantly impact early AF detection, potentially leading to more timely interventions and improved patient outcomes. The improved interpretability could also enhance clinicians' trust in the model's predictions.
+
+\section{Database and Data Preprocessing}
+We will use the PhysioNet/CinC Challenge 2017 dataset, which contains 8,528 single-lead ECG recordings lasting 9-60 seconds, with labels for normal rhythm, AF, other rhythm, and noise. Data preprocessing will involve resampling to a uniform frequency, normalization, noise reduction, and augmentation techniques to address class imbalance.
+
+\section{Discussion and Conclusion}
+This study aims to advance AF detection methods, potentially enabling more widespread and accurate screening. Key challenges include ensuring model generalization across diverse populations, balancing model complexity with real-time processing requirements, and addressing potential biases in the training data.
+
+Future work could explore federated learning for privacy-preserving model updates and integration with wearable devices for continuous monitoring. The successful implementation of this project could pave the way for more accurate, interpretable, and accessible AF detection tools, ultimately improving patient care and outcomes in cardiovascular health.
+
+\begin{thebibliography}{3}
+    \bibitem{hannun} A. Y. Hannun et al., "Cardiologist-level arrhythmia detection and classification in ambulatory electrocardiograms using a deep neural network," Nature Medicine, vol. 25, no. 1, pp. 65–69, 2019.
+    \bibitem{andersen} R. S. Andersen et al., "Deep learning for automated atrial fibrillation detection in short single-lead ECG recordings," in 2019 Computing in Cardiology (CinC), 2019, pp. 1–4.
+    \bibitem{cao} X. Cao et al., "Atrial Fibrillation Detection Using an Attention-Based Time-Incremental Convolutional Neural Network," Computers in Biology and Medicine, vol. 129, p. 104172, 2021.
+\end{thebibliography}
+
+\end{document}
