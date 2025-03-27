@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+%\title{Assignment 2: 100 Points\\Logistic Regression, Binary Classification,
+%Softmax Regression}
+%\author{\textbf{Due Date: M 02/17}}
+%\maketitle
+\begin{center}
+      \Large \textbf{Assignment 6: 100 Points}\\\textbf{Cross-Validation, Random Search,
+            Grid Search and Bayesian Optimization}\\
+      \vspace{0.5cm}
+      \textbf{Due Date: M 03/17}
+\end{center}
+\section*{Part A: Cross-Validation (30 Points)}
+\subsection*{Cross-Validation on a Large Dataset}
+\textbf{Q1.} Consider a dataset with 1,500 samples and 25 features. You are
+performing 10-fold cross-validation to tune the hyperparameters of a model.
+\begin{enumerate}
+      \item[(a)] How many samples will be used for training and testing in each fold?
+            \\
+            In each fold, \underline{\hspace{3cm}} samples will be used for training, and \underline{\hspace{3cm}} samples will be used for testing (\textbf{7 points}).
+            \subsection*{Answers:}
+            Total samples = 1500. \\
+            Using 10-fold cross-validation, the dataset is split into 10 equal parts. \\
+            Test samples per fold = $\frac{1500}{10} = 150$. \\
+            Training samples per fold = Total samples - Test samples = $1500 - 150 = 1350$. \\
+            \textbf{Answer:} 1,350 samples will be used for training, and 150 samples will be used for testing.
+      \item[(b)] Given that the model achieves an accuracy of 85\% on each fold, what
+            will be the overall accuracy after completing the 10-fold cross-validation? \\
+            The overall accuracy will be \underline{\hspace{3cm}} \% after completing the
+            10-fold cross-validation (\textbf{8 points}).
+            \subsection*{Answers:}
+            Since each fold achieves 85\% accuracy, the average accuracy over all folds remains 85\%. \\
+            \textbf{Answer:} 85\%
+\end{enumerate}
+\newpage
+\subsection*{Stratified Cross-Validation}
+\textbf{Q2.} You are now performing stratified 5-fold cross-validation on a dataset
+with 2,000 samples where 60\% of the samples belong to Class A, and 40\% belong to
+Class B.
+\begin{enumerate}
+      \item[(a)] How many samples from each class will be in each fold? \\
+            Class A samples in each fold = \underline{\hspace{3cm}}, Class B samples in
+            each fold = \underline{\hspace{3cm}} (\textbf{7 points}).
+            \subsection*{Answers:}
+            Total samples = 2000. \\
+            Class A samples = $2000 \times 0.60 = 1200$. \\
+            Class B samples = $2000 \times 0.40 = 800$. \\
+            Since there are 5 folds, each fold gets: \\\\
+            Class A per fold = $\frac{1200}{5} = 240$. \\\\
+            Class B per fold = $\frac{800}{5} = 160$. \\\\
+            \textbf{Answer:} Class A: 240 samples, Class B: 160 samples.
+      \item[(b)] What is the proportion of Class A samples in each fold? \\
+            The proportion of Class A samples in each fold is \underline{\hspace{3cm}} \%
+            (\textbf{8 points}).
+            \subsection*{Answers:}
+            Total samples per fold = 240 (Class A) + 160 (Class B) = 400. \\
+            Proportion of Class A = $\frac{240}{400} \times 100 = 60\%$. \\
+            \textbf{Answer:} 60\%
+\end{enumerate}
+
+\newpage
+\section*{Part B: Grid Search and Random Search (40 Points)}
+\subsection*{Grid Search with Multiple Hyperparameters}
+\textbf{Q3.} You are tuning a machine learning model with the following
+hyperparameters:
+\begin{itemize}
+      \item $C$: [0.01, 0.1, 1, 10, 100]
+      \item $\epsilon$: [0.01, 0.1, 0.5, 1]
+      \item $\gamma$: ['scale', 'auto']
+\end{itemize}
+\begin{enumerate}
+      \item[(a)] How many total hyperparameter combinations are there in the grid? \\
+            The total number of hyperparameter combinations in the grid is \underline{\hspace{3cm}} (\textbf{10 points}).
+            \subsection*{Answers:}
+            Options for $C$ = 5, for $\epsilon$ = 4, for $\gamma$ = 2. \\
+            Total combinations = $5 \times 4 \times 2 = 40$. \\
+            \textbf{Answer:} 40
+      \item[(b)] If you perform 10-fold cross-validation for each hyperparameter
+            combination, how many evaluations will be performed? \\
+            The total number of evaluations performed will be \underline{\hspace{3cm}} (\textbf{10 points}).
+            \subsection*{Answers:}
+            Each of the 40 combinations is evaluated using 10-fold cross-validation. \\
+            Total evaluations = $40 \times 10 = 400$. \\
+            \textbf{Answer:} 400
+\end{enumerate}
+\newpage
+\subsection*{Random Search with Multiple Iterations}
+\textbf{Q4.} You are now performing random search over the same hyperparameters,
+but you randomly select 12 combinations.
+\begin{enumerate}
+      \item[(a)] How many different hyperparameter combinations will be selected in
+            each iteration? \\
+            The number of hyperparameter combinations selected in each iteration is \underline{\hspace{3cm}} (\textbf{10 points}).
+            \subsection*{Answers:}
+            By the problem statement, 12 combinations are randomly selected per iteration. \\
+            \textbf{Answer:} 12
+      \item[(b)] If you perform 20 iterations of random search, how many total
+            evaluations will be conducted? \\
+            The total number of evaluations conducted will be \underline{\hspace{3cm}} (\textbf{10 points}).
+            \subsection*{Answers:}
+            Total evaluations = Number of iterations $\times$ combinations per iteration = $20 \times 12 = 240$. \\
+            \textbf{Answer:} 240
+\end{enumerate}
+
+\newpage
+\section*{Part C: Bayesian Optimization (30 Points)}
+\textbf{Q5.} You are tuning the hyperparameters of a model with the following
+hyperparameter ranges:
+\begin{itemize}
+      \item $C$: [0.01, 0.1, 1, 10, 100]
+      \item $\epsilon$: [0.01, 0.1, 0.5, 1]
+      \item $\gamma$: ['scale', 'auto']
+\end{itemize}
+Number of iterations in Bayesian optimization = 50.
+\begin{enumerate}
+      \item[(a)] What is the total number of hyperparameter combinations in the
+            search space? \\
+            The total number of hyperparameter combinations in the search space is \underline{\hspace{3cm}} (\textbf{7 points}).
+            \subsection*{Answers:}
+            The hyperparameter space is the same as in grid search: $C$ has 5 options, $\epsilon$ has 4 options, and $\gamma$ has 2 options. \\
+            Total combinations = $5 \times 4 \times 2 = 40$. \\
+            \textbf{Answer:} 40
+      \item[(b)] If Bayesian optimization selects 4 combinations per iteration, how
+            many evaluations will be done in 50 iterations? \\
+            The total number of evaluations performed will be \underline{\hspace{3cm}} (\textbf{7 points}).
+            \subsection*{Answers:}
+            Evaluations per iteration = 4. \\
+            Total evaluations = $4 \times 50 = 200$. \\
+            \textbf{Answer:} 200
+      \item[(c)] What is the total number of evaluations that would be needed for
+            grid search to explore all 40 combinations with 10-fold cross-validation? \\
+            The total number of evaluations for grid search would be \underline{\hspace{3cm}} (\textbf{8 points}).
+            \subsection*{Answers:}
+            Grid search evaluations = Total combinations $\times$ number of folds = $40 \times 10 = 400$. \\
+            \textbf{Answer:} 400
+      \item[(d)] How does the total number of evaluations compare between Grid Search
+            and Bayesian Optimization? \\
+            The total evaluations for Grid Search are \underline{\hspace{3cm}}, and the
+            total evaluations for Bayesian Optimization are \underline{\hspace{3cm}} (\textbf{8 points}).
+            \subsection*{Answers:}
+            From (c), Grid Search requires 400 evaluations. \\
+            From (b), Bayesian Optimization requires 200 evaluations. \\
+            \textbf{Answer:} Grid Search: 400, Bayesian Optimization: 200
+\end{enumerate}
+\end{document}
